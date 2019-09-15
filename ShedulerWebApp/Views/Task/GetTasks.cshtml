@@ -1,0 +1,55 @@
+﻿@{
+    Layout = "_Layout";
+}
+@using ShedulerWebApp.Models;
+@using System.Collections.Generic;
+@model List<ShedulerWebApp.Models.Task>
+
+<h2>Добаввьте задачу</h2>
+<form asp-controller="Task" asp-action="AddTask" method="post">
+    <input type="hidden" value="Model" name="Id" />
+    <table>
+        <tr>
+            <td>Заголовок:</td>
+            <td><input type="text" name="Header" /> </td>
+        </tr>
+        <tr>
+            <td>Описание:</td>
+            <td><input type="text" name="Description" /></td>
+        </tr>
+        <tr><td><input type="submit" value="Добавить" /> </td><td></td></tr>
+    </table>
+</form>
+<br />
+<h2>Ваши активные задачи</h2>
+<table class="a">
+    <tr class="a">
+        <th class="a" style="width:60px">Id</th>
+        <th class="a" style="width:300px">Название</th>
+        <th class="a" style="width:800px">Описание</th>
+    </tr>
+    @foreach (var task in Model)
+    {
+
+
+        <tr class="a">
+            <td class="a" >
+                @task.Id
+            </td>
+            <th class="a" >
+                @task.Header
+            </th>
+            <th class="a" >
+                @task.Description
+            </th>
+            <th class="a">
+                <form asp-controller="Task" asp-action="Delete" asp-route-id="@task.Id" method="post">
+                    <input type="submit" value="Удалить" />
+                </form>
+            </th>
+        </tr>
+    }
+</table>
+
+     
+
